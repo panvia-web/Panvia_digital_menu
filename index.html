@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú - Bar Cafetería Panvia Rambla Pulido</title>
+  <style>
+    :root {
+      --primary: #c88d36;
+      --dark: #1f1f1f;
+      --light: #f8f9fa;
+      --gray: #6c757d;
+      --border: #e9ecef;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f6; color: #333; line-height: 1.5; }
+
+    header { background-color: var(--dark); color: white; text-align: center; padding: 2.5rem 1rem 1.5rem; }
+    header h1 { font-size: 2.2rem; color: var(--primary); letter-spacing: 1px; margin-bottom: 0.3rem; }
+    header p { font-size: 0.95rem; color: #ccc; }
+
+    .search-container { max-width: 800px; margin: -1.2rem auto 1rem; padding: 0 1rem; }
+    .search-input { width: 100%; padding: 0.8rem 1.2rem; font-size: 1rem; border: none; border-radius: 25px; box-shadow: var(--shadow); outline: none; }
+
+    nav { display: flex; overflow-x: auto; max-width: 900px; margin: 0 auto; padding: 0.5rem 1rem; gap: 0.5rem; scrollbar-width: none; }
+    nav::-webkit-scrollbar { display: none; }
+    .nav-btn { background: white; border: 1px solid var(--border); padding: 0.6rem 1.2rem; border-radius: 20px; font-weight: 600; font-size: 0.85rem; color: var(--dark); white-space: nowrap; cursor: pointer; transition: all 0.2s; }
+    .nav-btn.active, .nav-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+    main { max-width: 900px; margin: 1.5rem auto 3rem; padding: 0 1rem; }
+    .section-title { font-size: 1.4rem; color: var(--dark); border-bottom: 2px solid var(--primary); padding-bottom: 0.4rem; margin: 2rem 0 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+    
+    .card { background: white; border-radius: 10px; padding: 1rem 1.2rem; box-shadow: var(--shadow); display: flex; flex-direction: column; justify-content: space-between; }
+    .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.3rem; }
+    .card-title { font-weight: 700; font-size: 1rem; color: var(--dark); text-transform: uppercase; }
+    .card-price { font-weight: 700; color: var(--primary); font-size: 1.05rem; white-space: nowrap; }
+    .card-desc { font-size: 0.85rem; color: var(--gray); text-transform: lowercase; }
+    .card-desc::first-letter { text-transform: uppercase; }
+
+    .combo-price { font-size: 0.8rem; color: var(--gray); font-weight: normal; display: block; text-align: right; }
+
+    footer { background: var(--dark); color: #aaa; text-align: center; padding: 2rem 1rem; font-size: 0.8rem; }
+    footer p { margin-bottom: 0.5rem; }
+
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>PANVIA RAMBLA PULIDO</h1>
+    <p>Carta digital</p>
+    <p>Visítanos en Santa Cruz de Tenerife, Rambla Pulido, nº29</p>
+    <p>Horario:</p>
+    <p>Lunes - Jueves: 6:00 - 22:00</p>
+    <p>Viernes: 6:00 - 23:00</p>
+    <p>Sábado - Domingo: 7:00 - 23:00</p>
+  </header>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Buscar un producto o ingrediente..." onkeyup="filterMenu()">
+  </div>
+
+  <nav id="categoryNav">
+    <button class="nav-btn active" onclick="filterCategory('all', event)">Todos</button>
+    <button class="nav-btn" onclick="filterCategory('cafes', event)">Cafés</button>
+    <button class="nav-btn" onclick="filterCategory('refrescos', event)">Refrescos & Cervezas</button>
+    <button class="nav-btn" onclick="filterCategory('salados', event)">Salados & Picar</button>
+    <button class="nav-btn" onclick="filterCategory('bocadillos', event)">Bocadillos</button>
+    <button class="nav-btn" onclick="filterCategory('medios-bocadillos', event)">Medios Bocadillos</button>
+    <button class="nav-btn" onclick="filterCategory('sandwiches', event)">Sándwiches</button>
+    <button class="nav-btn" onclick="filterCategory('hamburguesas', event)">Hamburguesas</button>
+    <button class="nav-btn" onclick="filterCategory('arepas', event)">Arepas</button>
+    <button class="nav-btn" onclick="filterCategory('croissants', event)">Croissants</button>
+    <button class="nav-btn" onclick="filterCategory('platos', event)">Platos Combinados</button>
+  </nav>
+
+  <main>
+    <section class="menu-section" data-category="cafes">
+      <h2 class="section-title">Café y Bebidas Calientes</h2>
+      <div class="grid">
+        <div class="card"><div class="card-header"><span class="card-title">Café Solo</span><span class="card-price">1.20 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Cortado Natural</span><span class="card-price">1.30 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Cortado Leche y Leche</span><span class="card-price">1.30 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Cortado Largo</span><span class="card-price">1.50 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Café Bombón</span><span class="card-price">1.30 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Barraquito</span><span class="card-price">1.50 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Barraquito Especial</span><span class="card-price">2.90 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Americano</span><span class="card-price">1.50 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Café con Leche</span><span class="card-price">1.70 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Café con Leche con Condensada</span><span class="card-price">1.80 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Carajillo</span><span class="card-price">1.60 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Infusiones</span><span class="card-price">1.60 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Colacao</span><span class="card-price">1.60 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Chocolate Taza Pequeña</span><span class="card-price">1.90 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Chocolate Taza Grande</span><span class="card-price">2.50 €</span></div></div>
+      </div>
+    </section>
+
+    <section class="menu-section" data-category="refrescos">
+      <h2 class="section-title">Refrescos y Cervezas</h2>
+      <div class="grid">
+        <div class="card"><div class="card-header"><span class="card-title">Refrescos Variados</span><span class="card-price">1.90 €</span></div><div class="card-desc">Coca-Cola, Coca-Cola Zero, Nestea mango-piña, Nestea limón, Nestea maracuyá, Nestea frutos rojos, Aquarius naranja, Aquarius limón, Tónica, Fanta naranja, Fanta limón, Appletiser, Clipper, 7Up</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Red Bull</span><span class="card-price">2.50 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Jugos Embotellados</span><span class="card-price">1.70 €</span></div><div class="card-desc">Tropical, manzana, pera-piña, mango, melocotón</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Zumo Natural de Naranja</span><span class="card-price">Consultar</span></div><div class="card-desc">Disponible en tamaño pequeño y grande</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Batidos / Zumos Naturales</span><span class="card-price">4.90 €</span></div><div class="card-desc">Fresa, piña, mango o papaya</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Batido / Zumo Surtido</span><span class="card-price">5.90 €</span></div><div class="card-desc">Combinación a elegir de fresa, piña, mango o papaya</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Agua Pequeña (0.5L)</span><span class="card-price">1.00 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Agua Grande (1.5L)</span><span class="card-price">1.90 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Dorada Pilsen</span><span class="card-price">1.80 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Dorada Especial</span><span class="card-price">2.20 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Dorada Limón sin Alcohol</span><span class="card-price">1.90 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Dorada Tostada / Tostada 0.0</span><span class="card-price">2.20 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tropical</span><span class="card-price">1.90 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Heineken</span><span class="card-price">1.50 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Estrella Galicia / 1906</span><span class="card-price">2.50 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tinto de Verano</span><span class="card-price">2.20 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Copa vino tinto / blanco</span><span class="card-price">2.50 €</span></div></div>
+      </div>
+    </section>
+
+    <section class="menu-section" data-category="salados">
+      <h2 class="section-title">Salados</h2>
+      <div class="grid">
+        <div class="card"><div class="card-header"><span class="card-title">Churros Lazos (6 uds.)</span><span class="card-price">2.50 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Papas Fritas</span><span class="card-price">3.90 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Empanadillas Argentinas</span><span class="card-price">2.20 €</span></div><div class="card-desc">Carne, carne picante, atún, espinaca, jamón y queso, queso y cebolla, pollo</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Ración Tortilla Española</span><span class="card-price">3.90 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Croquetas (6 uds.)</span><span class="card-price">4.90 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tequeños (6 uds.)</span><span class="card-price">8.90 €</span></div></div>
+      </div>
+    </section>
+
+    <section class="menu-section" data-category="bocadillos">
+      <h2 class="section-title">Bocadillos</h2>
+      <div class="grid">
+        <div class="card"><div class="card-header"><span class="card-title">Mixto</span><span class="card-price">4.50 €</span></div><div class="card-desc">Jamón y queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pollo</span><span class="card-price">4.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tortilla Española</span><span class="card-price">4.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tortilla Francesa</span><span class="card-price">4.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Lomo</span><span class="card-price">4.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Bacon</span><span class="card-price">4.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Catalán</span><span class="card-price">4.50 €</span></div><div class="card-desc">Jamón serrano y tumaca</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Catalán con Queso</span><span class="card-price">5.50 €</span></div><div class="card-desc">Jamón serrano, tumaca y queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pata Asada</span><span class="card-price">4.50 €</span></div><div class="card-desc">Tumaca y queso blanco</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Salami</span><span class="card-price">4.50 €</span></div><div class="card-desc">Queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pollo Mechado</span><span class="card-price">5.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Carne Mechada</span><span class="card-price">5.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Panvia</span><span class="card-price">5.90 €</span></div><div class="card-desc">Lomo, queso blanco, jamón cocido, ensalada, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Especial Milanesa</span><span class="card-price">6.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+      </div>
+    </section>
+
+    <section class="menu-section" data-category="medios-bocadillos">
+      <h2 class="section-title">Medios Bocadillos</h2>
+      <div class="grid">
+        <div class="card"><div class="card-header"><span class="card-title">Tostada</span><span class="card-price">2.20 €</span></div><div class="card-desc"></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Mixto</span><span class="card-price">2.50 €</span></div><div class="card-desc">Jamón y queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pollo</span><span class="card-price">2.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tortilla Española</span><span class="card-price">2.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tortilla Francesa</span><span class="card-price">2.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Lomo</span><span class="card-price">2.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Bacon</span><span class="card-price">2.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Catalán</span><span class="card-price">2.50 €</span></div><div class="card-desc">Jamón serrano y tumaca</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Catalán con Queso</span><span class="card-price">2.90 €</span></div><div class="card-desc">Jamón serrano, tumaca y queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pata Asada</span><span class="card-price">2.50 €</span></div><div class="card-desc">Tumaca y queso blanco</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Salami</span><span class="card-price">2.50 €</span></div><div class="card-desc">Queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pollo Mechado</span><span class="card-price">2.90 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Carne Mechada</span><span class="card-price">2.90 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+      </div>
+    </section>
+
+    <section class="menu-section" data-category="sandwiches">
+      <h2 class="section-title">Sándwiches</h2>
+      <div class="grid">
+        <div class="card"><div class="card-header"><span class="card-title">Mixto</span><span class="card-price">2.90 €</span></div><div class="card-desc">Jamón y queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Mixto con queso blanco</span><span class="card-price">3.90 €</span></div><div class="card-desc">Jamón y queso blanco</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Medio Mixto</span><span class="card-price">1.90 €</span></div><div class="card-desc">Jamón y queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Medio Mixto con queso blanco</span><span class="card-price">2.90 €</span></div><div class="card-desc">Jamón y queso blanco</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pollo</span><span class="card-price">4.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tortilla Española</span><span class="card-price">4.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tortilla Francesa</span><span class="card-price">4.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Lomo</span><span class="card-price">4.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Bacon</span><span class="card-price">4.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Catalán</span><span class="card-price">4.50 €</span></div><div class="card-desc">Jamón serrano y tumaca</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Salami</span><span class="card-price">4.50 €</span></div><div class="card-desc">Queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pata asada</span><span class="card-price">4.50 €</span></div><div class="card-desc">Tumaca y queso blanco</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pollo mechado</span><span class="card-price">4.90 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Solo queso</span><span class="card-price">4.50 €</span></div><div class="card-desc">Queso manchego o blanco</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Carne mechada</span><span class="card-price">4.90 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Panvia</span><span class="card-price">5.50 €</span></div><div class="card-desc">Lomo, queso blanco, jamón cocido, ensalada, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Americano</span><span class="card-price">5.50 €</span></div><div class="card-desc">Bacon, jamón, huevo, queso, ensalada, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Club</span><span class="card-price">8.90 €</span></div><div class="card-desc">Pollo, lomo, bacon, huevo, ensalada, queso, mayonesa, cebolla frita y papas fritas</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Club "Loco"</span><span class="card-price">10.90 €</span></div><div class="card-desc">Pollo, lomo, bacon, jamón cocido, huevo, ensalada, queso, mayonesa, mostaza, ketchup, cebolla frita y papas fritas</div></div>
+      </div>
+    </section>
+
+    <section class="menu-section" data-category="hamburguesas">
+      <h2 class="section-title">Hamburguesas</h2>
+      <div class="grid">
+        <div class="card"><div class="card-header"><span class="card-title">Normal</span><span class="card-price">4.50 €</span></div><div class="card-desc">Jamón, queso, ensalada, mayonesa, ketchup, mostaza y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Combo Normal (Con Papas)</span><span class="card-price">7.90 €</span></div><div class="card-desc">Hamburguesa Normal acompañada de papas fritas y una bebida</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Americana</span><span class="card-price">6.50 €</span></div><div class="card-desc">Bacon, jamón, huevo, queso, ensalada, mayonesa, ketchup, mostaza y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Combo Americana (Con Papas)</span><span class="card-price">9.90 €</span></div><div class="card-desc">Hamburguesa Americana acompañada de papas fritas y una bebida</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Panvia</span><span class="card-price">6.50 €</span></div><div class="card-desc">Lomo, queso blanco, jamón cocido, ensalada, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Combo Panvia (Con Papas)</span><span class="card-price">9.90 €</span></div><div class="card-desc">Hamburguesa Panvia acompañada de papas fritas y una bebida</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Dúplex (Doble Carne)</span><span class="card-price">9.90 €</span></div><div class="card-desc">Bacon, jamón, huevo, queso, ensalada, mayonesa, ketchup, mostaza y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Combo Dúplex (Con Papas)</span><span class="card-price">12.90 €</span></div><div class="card-desc">Hamburguesa Dúplex acompañada de papas fritas y una bebida</div></div>
+      </div>
+    </section>
+
+    <section class="menu-section" data-category="arepas">
+      <h2 class="section-title">Arepas</h2>
+      <div class="grid">
+        <div class="card"><div class="card-header"><span class="card-title">Mixta</span><span class="card-price">4.50 €</span></div><div class="card-desc">Jamón y queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Reina Pepiada</span><span class="card-price">4.50 €</span></div><div class="card-desc">Pollo y salsa de aguacate</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Carne Mechada</span><span class="card-price">4.90 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pollo Mechado</span><span class="card-price">4.90 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Perico</span><span class="card-price">4.50 €</span></div><div class="card-desc">Tomate, cebolla y huevo</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pata con Queso y Tomate</span><span class="card-price">4.50 €</span></div><div class="card-desc">Queso blanco, pata y tomate natural</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Lomo</span><span class="card-price">4.50 €</span></div><div class="card-desc">Lechuga y tomate</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Queso Asado y Miel</span><span class="card-price">4.50 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Atún</span><span class="card-price">4.50 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Panvia</span><span class="card-price">5.50 €</span></div><div class="card-desc">Lomo, queso blanco, jamón cocido, ensalada, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Mechada con queso</span><span class="card-price">4.90 €</span></div><div class="card-desc">Queso amarillo</div></div>
+      </div>
+    </section>
+
+    <section class="menu-section" data-category="croissants">
+      <h2 class="section-title">Croissants</h2>
+      <div class="grid">
+        <div class="card"><div class="card-header"><span class="card-title">Tostada</span><span class="card-price">2.50 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Solo</span><span class="card-price">2.00 €</span></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Mixto</span><span class="card-price">3.90 €</span></div><div class="card-desc">Jamón y queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pollo</span><span class="card-price">4.90 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tortilla Española</span><span class="card-price">4.90 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tortilla Francesa</span><span class="card-price">4.90 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Lomo</span><span class="card-price">4.90 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Catalán</span><span class="card-price">4.90 €</span></div><div class="card-desc">Jamón serrano y tumaca</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Carne Mechada</span><span class="card-price">5.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pata Asada</span><span class="card-price">4.90 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pollo Mechado</span><span class="card-price">5.50 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Solo queso</span><span class="card-price">4.90 €</span></div><div class="card-desc">Queso manchego o blanco</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Bacon</span><span class="card-price">4.90 €</span></div><div class="card-desc">Lechuga, tomate, queso, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Salami</span><span class="card-price">4.90 €</span></div><div class="card-desc">Queso</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Americano</span><span class="card-price">5.90 €</span></div><div class="card-desc">Bacon, jamón, huevo, queso, ensalada, mayonesa y cebolla frita</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Panvia</span><span class="card-price">5.90 €</span></div><div class="card-desc">Lomo, queso blanco, jamón cocido, ensalada, mayonesa y cebolla frita</div></div>
+      </div>
+    </section>
+
+    <section class="menu-section" data-category="platos">
+      <h2 class="section-title">Platos Combinados</h2>
+      <div class="grid">
+        <div class="card"><div class="card-header"><span class="card-title">Arroz a la Cubana</span><span class="card-price">10.90 €</span></div><div class="card-desc">Arroz, huevo, salchicha, papas fritas, plátano frito y salsa de tomate</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pechuga a la Plancha</span><span class="card-price">12.90 €</span></div><div class="card-desc">Pechuga, papas fritas y ensalada</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Escalope de Pollo / Ternera</span><span class="card-price">12.90 €</span></div><div class="card-desc">Papas fritas y ensalada</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Milanesa a la Napolitana</span><span class="card-price">13.90 €</span></div><div class="card-desc">Jamón, queso, tomate frito, papas fritas y huevo</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Lágrimas de Pollo</span><span class="card-price">10.90 €</span></div><div class="card-desc">Papas fritas y ensalada</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Pollo Kajun</span><span class="card-price">10.90 €</span></div><div class="card-desc">Papas fritas y ensalada</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Calamares a la Romana</span><span class="card-price">10.90 €</span></div><div class="card-desc">Papas fritas y ensalada</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Secreto Ibérico</span><span class="card-price">13.90 €</span></div><div class="card-desc">Papas fritas y ensalada</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Papas Locas</span><span class="card-price">10.90 €</span></div><div class="card-desc">Jamón, queso, cebolla frita, mayonesa, ketchup y mostaza</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Papas Locas "Súper"</span><span class="card-price">12.90 €</span></div><div class="card-desc">Jamón, queso, cebolla frita, carne mechada, pollo mechado, alioli, mayonesa, ketchup y mostaza</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Papas Panvia</span><span class="card-price">11.90 €</span></div><div class="card-desc">Jamón, queso, cebolla frita, queso blanco, bacon, mayonesa, ketchup, mostaza y alioli</div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Huevos Rotos</span><span class="card-price">11.90 €</span></div><div class="card-desc">Papas fritas, chorizo, huevo y jamón serrano</div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Precios con IGIC incluido.</strong></p>
+    <p>Toda combinación ajena a la carta o modificación de ingredientes puede suponer una alteración del precio.</p>
+    <p>Nuestros productos contienen o pueden contener trazas de los 14 alérgenos (Regulación 1169/2011).</p>
+  </footer>
+
+  <script>
+    function filterCategory(cat, e) {
+      const buttons = document.querySelectorAll('.nav-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      e.target.classList.add('active');
+
+      const sections = document.querySelectorAll('.menu-section');
+      sections.forEach(sec => {
+        if (cat === 'all' || sec.dataset.category === cat) {
+          sec.style.display = 'block';
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+    }
+
+    function filterMenu() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(input)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
