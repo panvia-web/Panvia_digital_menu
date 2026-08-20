@@ -44,12 +44,11 @@
     .combo-price { font-size: 0.8rem; color: var(--gray); font-weight: normal; display: block; text-align: right; }
 
     .alergenos-img {
-      max-width: 100%;
-      height: auto;
+      width: 100%;
+      max-width: 100%; /* 限制最大宽度不能超过手机屏幕 */
+      height: auto;    /* 自动维持等比例高度，防止扭曲 */
       display: block;
       margin: 1rem auto 0;
-      max-width: 900px;
-      /* Añadimos un pequeño borde para que se vea más profesional, como una tarjeta */
       border: 1px solid rgba(255, 255, 255, 0.15); 
       border-radius: 8px;
     }
